@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Portal MAIS · Rotinas Operacionais</title>
+  <meta name="description" content="Portal interno de manuais de rotina da operação MAIS."/>
+
+  <link rel="icon" type="image/png" href="assets/logo-mais.png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="src/styles/base.css"/>
+  <link rel="stylesheet" href="src/styles/layout.css"/>
+  <link rel="stylesheet" href="src/styles/dashboard.css"/>
+  <link rel="stylesheet" href="src/styles/screens.css"/>
+  <link rel="stylesheet" href="src/styles/bootstrap.css"/>
+</head>
+<body>
+  <div id="root">
+    <!-- Splash inicial enquanto React + planilha carregam -->
+    <div class="bootstrap-screen">
+      <div class="bootstrap-spinner"></div>
+      <strong>Portal MAIS</strong>
+      <span>Carregando…</span>
+    </div>
+  </div>
+
+  <!-- React 18 -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <!-- Babel (transpila JSX no browser — sem build step) -->
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <!-- PapaParse — lê o CSV da planilha -->
+  <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <!-- Dados (configuração + fetch da planilha) -->
+  <script src="src/data.js"></script>
+
+  <!-- UI primitives + telas -->
+  <script type="text/babel" src="src/ui.jsx"></script>
+  <script type="text/babel" src="src/screen-login.jsx"></script>
+  <script type="text/babel" src="src/screen-shell.jsx"></script>
+  <script type="text/babel" src="src/screen-dashboard.jsx"></script>
+  <script type="text/babel" src="src/screen-manual.jsx"></script>
+  <script type="text/babel" src="src/screen-admin.jsx"></script>
+
+  <!-- App entry -->
+  <script type="text/babel" src="src/app.jsx"></script>
+</body>
+</html>
