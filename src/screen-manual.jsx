@@ -47,8 +47,8 @@ function ManualView({ manual, onBack }) {
   // PDFs relacionados — colunas pdf1_nome/pdf1_link ... pdf3_nome/pdf3_link na planilha
   const pdfs = [];
   for (let i = 1; i <= 3; i++) {
-    if (manual[`pdf${i}_link`] && manual[`pdf${i}_nome`]) {
-      pdfs.push({ nome: manual[`pdf${i}_nome`], link: manual[`pdf${i}_link`] });
+    if (manual[`pdf${i}_nome`]) {
+      pdfs.push({ nome: manual[`pdf${i}_nome`], link: manual[`pdf${i}_link`] || null });
     }
   }
 
@@ -134,11 +134,17 @@ function ManualView({ manual, onBack }) {
             <h2>Documentos relacionados</h2>
             <div className="mv-pdf-list">
               {pdfs.map((p, i) => (
-                <a key={i} href={p.link} target="_blank" rel="noopener" className="mv-pdf-btn">
-                  <Icon name="download" size={15}/>
-                  <span>{p.nome}</span>
-                  <Icon name="arrow" size={13}/>
-                </a>
+                p.link
+                  ? <a key={i} href={p.link} target="_blank" rel="noopener" className="mv-pdf-btn">
+                      <Icon name="download" size={15}/>
+                      <span>{p.nome}</span>
+                      <Icon name="arrow" size={13}/>
+                    </a>
+                  : <div key={i} className="mv-pdf-btn mv-pdf-nolnk">
+                      <Icon name="download" size={15}/>
+                      <span>{p.nome}</span>
+                      <span className="mv-pdf-soon">em breve</span>
+                    </div>
               ))}
             </div>
           </section>
