@@ -935,3 +935,15 @@
   text-decoration: none;
 }
 .mv-pdf-btn span { flex: 1; }
+
+/* PDF sem link ainda */
+.mv-pdf-nolnk {
+  opacity: .6; cursor: default; pointer-events: none;
+}
+.mv-pdf-soon {
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em;
+  color: var(--ink-400);
+  background: rgba(15,23,42,.06);
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase;
+}
