@@ -1,0 +1,51 @@
+/* ============================================================
+   BOOTSTRAP — splash screen enquanto React + planilha carregam
+   ============================================================ */
+
+.bootstrap-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 14px;
+  background: var(--bg, #F6F7FB);
+  color: var(--ink-700, #1F2A44);
+  font-family: "Inter", "Montserrat", system-ui, sans-serif;
+}
+
+.bootstrap-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(248, 139, 39, 0.18);
+  border-top-color: #F88B27;
+  border-radius: 50%;
+  animation: bs-spin 0.75s linear infinite;
+}
+
+@keyframes bs-spin {
+  to { transform: rotate(360deg); }
+}
+
+.bootstrap-screen strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-900, #0B1220);
+}
+
+.bootstrap-screen span {
+  font-size: 13px;
+  color: var(--ink-400, #6B7894);
+}
+
+.bootstrap-error {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: #DC2626;
+  max-width: 360px;
+  text-align: center;
+  padding: 10px 16px;
+  background: rgba(220, 38, 38, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.18);
+  border-radius: 8px;
+}
