@@ -20,7 +20,7 @@ window.MAIS_CONFIG = {
   ADMIN_USUARIO:     "admin.mais",
 
   // Link direto pra planilha (botão "Abrir planilha" no painel admin).
-  SHEET_EDIT_URL: "https://docs.google.com/spreadsheets/d/1tJ2KWx2maRJ8lyPtfCKUAuGLW4MYbCq7U6tIQgpeoDY/edit?usp=sharing",
+  SHEET_EDIT_URL: "https://docs.google.com/spreadsheets/d/1tJ2KWx2maRJ8lyPtfCKUAuGLW4MYbCq7U6tIQgpeoDY/edit",
 };
 
 // ----------------------------------------------------------------------
