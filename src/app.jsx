@@ -78,7 +78,6 @@ function App() {
   } : data;
 
   const navigate = (id) => {
-    if (id === "home")    { setRoute("dashboard"); setOpenManual(null); return; }
     if (id === "library") { setRoute("dashboard"); setOpenManual(null); return; }
     if (id === "fav")     { setRoute("favs");      setOpenManual(null); return; }
     if (id === "admin")   { if (isAdmin) { setRoute("admin"); setOpenManual(null); } return; }
@@ -91,19 +90,19 @@ function App() {
   let breadcrumb = ["Início"];
 
   if (route === "dashboard") {
-    breadcrumb = ["Início", "Biblioteca de manuais"];
+    breadcrumb = ["Biblioteca de manuais"];
     content = <Dashboard data={dataWithFavs} onOpenManual={openManualFn} onToggleFav={toggleFav}/>;
   } else if (route === "favs") {
-    breadcrumb = ["Início", "Favoritos"];
+    breadcrumb = ["Favoritos"];
     const favData = { ...dataWithFavs, manuals: dataWithFavs.manuals.filter(m => m.fav) };
     content = <Dashboard data={favData} onOpenManual={openManualFn} onToggleFav={toggleFav} emptyMsg="Você ainda não favoritou nenhum manual." />;
   } else if (route === "manual" && openManual) {
     const fresh = dataWithFavs.manuals.find(m => m.id === openManual.id) || openManual;
-    breadcrumb = ["Biblioteca", fresh.category.label, fresh.title];
-    content = <ManualView manual={fresh} onBack={() => setRoute("dashboard")} onToggleFav={toggleFav}/>;
+    breadcrumb = [fresh.category.label, fresh.title];
+    content = <ManualView manual={fresh} onBack={() => setRoute("dashboard")} onToggleFav={toggleFav} isAdmin={isAdmin}/>;
   } else if (route === "admin") {
     if (!isAdmin) { setTimeout(() => setRoute("dashboard"), 0); return null; }
-    breadcrumb = ["Administrador", "Painel"];
+    breadcrumb = ["Painel"];
     content = <AdminScreen
       data={{ ...dataWithFavs, user: { ...dataWithFavs.user, permission: "administrador" } }}
       onOpenManual={openManualFn}/>;
@@ -112,7 +111,6 @@ function App() {
   const activeNav =
     route === "admin"   ? "admin"   :
     route === "favs"    ? "fav"     :
-    route === "manual"  ? "library" :
     "library";
 
   return (
