@@ -471,3 +471,29 @@
 }
 .empty h4 { color: var(--ink-700); font-family: var(--font-display); font-size: 18px; margin: 12px 0 6px; }
 .empty p { margin: 0; font-size: 13.5px; }
+
+/* S4 — welcome message */
+.dash-welcome {
+  font-family: "Pacifico", cursive;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink-500);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.dash-welcome span {
+  color: var(--mais-orange);
+}
+
+/* S1 — KPI novidades highlight */
+.kpi.kpi-highlight {
+  border-color: var(--mais-orange);
+  background: var(--mais-orange-soft);
+  box-shadow: 0 0 0 3px rgba(248,139,39,.10);
+}
+.kpi.kpi-highlight .kpi-label {
+  color: var(--mais-orange-dark);
+}
+.kpi.kpi-highlight .kpi-value-sm {
+  color: var(--mais-orange-dark);
+}
