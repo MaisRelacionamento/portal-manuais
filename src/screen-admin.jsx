@@ -90,9 +90,7 @@ function AdminScreen({ data, onOpenManual }) {
           Sugestões da equipe
           {feedbacks.length > 0 && <span>{feedbacks.length}</span>}
         </button>
-        <button className={tab === "auditoria"? "is-active" : ""} onClick={() => setTab("auditoria")}>
-          Auditoria
-        </button>
+
       </nav>
 
       {tab === "manuais" && (
@@ -192,15 +190,7 @@ function AdminScreen({ data, onOpenManual }) {
         </section>
       )}
 
-      {tab === "auditoria" && (
-        <section className="admin-audit">
-          <div className="audit-row"><span className="audit-time">14:22</span><strong>Patrícia Lemos</strong> publicou <a href="#">CTM</a> via planilha</div>
-          <div className="audit-row"><span className="audit-time">11:08</span><strong>Rafael Tinoco</strong> atualizou link de <a href="#">Emissão Boleto Exchange</a></div>
-          <div className="audit-row"><span className="audit-time">09:45</span><strong>Diego Aragão</strong> alterou status de <a href="#">D2B</a> para <em>ready</em></div>
-          <div className="audit-row"><span className="audit-time">ontem</span><strong>Marina Vidal</strong> adicionou <a href="#">Middle Integração</a> à planilha</div>
-          <div className="audit-row"><span className="audit-time">ontem</span><strong>Carolina Bressan</strong> revisou descrição de <a href="#">Procedimento Comunicação</a></div>
-        </section>
-      )}
+
     </div>
   );
 }
