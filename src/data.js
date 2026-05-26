@@ -20,7 +20,7 @@ window.MAIS_CONFIG = {
   ADMIN_USUARIO:     "admin.mais",
 
   // Link direto pra planilha (botão "Abrir planilha" no painel admin).
-  SHEET_EDIT_URL: "https://docs.google.com/spreadsheets/d/1tJ2KWx2maRJ8lyPtfCKUAuGLW4MYbCq7U6tIQgpeoDY/edit",
+  SHEET_EDIT_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQJY4FsMsC4B88RFpngkJyxdu0KlOBUg0s4ffIjR6aZBzt6eYIRwmSgiECRrE_EhNwX_Lt0yMe4s_yc/edit",
 };
 
 // ----------------------------------------------------------------------
@@ -95,7 +95,7 @@ function normalizarManuais(rows) {
 // ----------------------------------------------------------------------
 
 const CACHE_KEY = "mais_portal_cache_v1";
-const CACHE_TTL = 5 * 60 * 1000; // 5 min
+const CACHE_TTL = 1 * 60 * 1000; // 1 min
 
 async function buscarCSV(url) {
   const resp = await fetch(url, { cache: "no-store" });
