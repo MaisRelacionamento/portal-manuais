@@ -36,7 +36,7 @@ function LoginScreen({ onLogin }) {
 
           <div className="login-brand-hero">
             <h1>Tudo que sua<br/>operação precisa,<br/><em>num só lugar.</em></h1>
-            <p>Manuais oficiais, fluxos atualizados e o passo-a-passo do dia da sua equipe — buscáveis e sempre na última versão.</p>
+            <p>Manuais oficiais, fluxos atualizados e o passo a passo do dia da sua equipe — buscáveis e sempre na última versão.</p>
           </div>
 
           <div className="login-brand-foot">
