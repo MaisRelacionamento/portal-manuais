@@ -69,6 +69,7 @@ function Dashboard({ data, onOpenManual, onToggleFav, emptyMsg }) {
           <span className="eyebrow">PORTAL · <em>Operação MAIS</em></span>
           <h1>Central de rotinas MAIS</h1>
           <p>Consulte os manuais oficiais da operação — conteúdo oficial, organizado e atualizado no NotebookLM.</p>
+          <p className="dash-slogan">Fazendo <em>MAIS!</em>, todo dia.</p>
         </div>
         <div className="dash-hero-side">
           <div className="kpi">
