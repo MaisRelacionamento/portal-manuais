@@ -155,7 +155,7 @@ const ManualThumb = ({ manual, height = 120, big = false }) => {
         {big && <span className="thumb-cat">{manual.category.label}</span>}
       </div>
       {manual.tag && <div className="thumb-tag"><StatusBadge kind={manual.tag}/></div>}
-      {isSoon && <div className="thumb-tag"><span className="status-badge status-soon">EM BREVE</span></div>}
+      {isSoon && <div className="thumb-soon-strip"><span>EM BREVE</span></div>}
     </div>
   );
 };
