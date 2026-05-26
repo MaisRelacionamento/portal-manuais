@@ -11,7 +11,7 @@
 
 window.MAIS_CONFIG = {
   // 🔧 CONFIGURAÇÃO PRINCIPAL — planilha Google publicada como CSV.
-  CSV_URL: "https://docs.google.com/spreadsheets/d/1tJ2KWx2maRJ8lyPtfCKUAuGLW4MYbCq7U6tIQgpeoDY/edit",
+  CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQJY4FsMsC4B88RFpngkJyxdu0KlOBUg0s4ffIjR6aZBzt6eYIRwmSgiECRrE_EhNwX_Lt0yMe4s_yc/pub?output=csv",
 
   // 🔐 Senhas de acesso (ok para portal interno sem dados sensíveis).
   // Para trocar: edite aqui e faça commit.
