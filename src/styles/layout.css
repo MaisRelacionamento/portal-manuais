@@ -387,3 +387,17 @@
   display: flex; align-items: center; gap: 8px;
   font-size: 13px; font-weight: 600; color: var(--ink-500);
 }
+
+/* Fix 3 — login slogan "Juntos somos MAIS!" */
+.login-slogan {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255,255,255,.90);
+  margin: 12px 0 0;
+  font-style: normal;
+}
+.login-slogan em {
+  font-style: italic;
+  color: var(--mais-orange);
+  font-weight: 800;
+}
