@@ -1,3 +1,38 @@
+// S1 — KPI "Última Atualização" destaca por 24h quando há manuais NOVOS
+const SEEN_KEY = "mais_novidades_seen_v1";
+function KpiNovidadeCard({ stats }) {
+  const hasNew = stats.publishedThisMonth > 0;
+  const [isHighlighted, setIsHighlighted] = React.useState(() => {
+    if (!hasNew) return false;
+    try {
+      const seen = localStorage.getItem(SEEN_KEY);
+      if (!seen) return true;
+      const diff = Date.now() - parseInt(seen, 10);
+      return diff < 24 * 60 * 60 * 1000; // 24h
+    } catch { return false; }
+  });
+
+  React.useEffect(() => {
+    if (hasNew) {
+      try {
+        if (!localStorage.getItem(SEEN_KEY)) {
+          localStorage.setItem(SEEN_KEY, Date.now().toString());
+        }
+      } catch {}
+    }
+  }, []);
+
+  return (
+    <div className={`kpi${isHighlighted ? " kpi-highlight" : ""}`}>
+      <span className="kpi-label">Última atualização</span>
+      <strong className="kpi-value kpi-value-sm">{stats.lastUpdate || "—"}</strong>
+      <span className={isHighlighted ? "kpi-delta" : "kpi-delta kpi-delta-muted"}>
+        {isHighlighted ? "🟠 Novidades disponíveis!" : `${stats.activeCategories} ${stats.activeCategories === 1 ? "categoria ativa" : "categorias ativas"}`}
+      </span>
+    </div>
+  );
+}
+
 // Dashboard / Biblioteca
 const { useState: useStateD, useMemo: useMemoD } = React;
 
@@ -9,8 +44,19 @@ function Dashboard({ data, onOpenManual, onToggleFav, emptyMsg }) {
   const filtered = useMemoD(() => {
     let r = [...manuals];
     if (activeCat !== "all") r = r.filter(m => m.cat === activeCat);
-    if (sort === "alfabetica") r.sort((a, b) => a.title.localeCompare(b.title));
-    else /* recentes */        r.sort((a, b) => (b.tag ? 1 : 0) - (a.tag ? 1 : 0));
+    // Always: ready items first sorted A-Z, soon items last sorted A-Z
+    r.sort((a, b) => {
+      if (a.status === "soon" && b.status !== "soon") return 1;
+      if (a.status !== "soon" && b.status === "soon") return -1;
+      if (sort === "recentes") {
+        // NEW tagged first among ready
+        if (a.status !== "soon" && b.status !== "soon") {
+          if (a.tag && !b.tag) return -1;
+          if (!a.tag && b.tag) return 1;
+        }
+      }
+      return a.title.localeCompare(b.title, "pt-BR");
+    });
     return r;
   }, [manuals, activeCat, sort]);
 
@@ -19,6 +65,7 @@ function Dashboard({ data, onOpenManual, onToggleFav, emptyMsg }) {
       {/* HERO — sem campo de busca duplicado */}
       <section className="dash-hero">
         <div>
+          <div className="dash-welcome">Seja bem-vindo(a) ao Portal <span>MAIS</span> 👋</div>
           <span className="eyebrow">PORTAL · <em>Operação MAIS</em></span>
           <h1>Central de rotinas MAIS</h1>
           <p>Consulte os manuais oficiais da operação — conteúdo oficial, organizado e atualizado no NotebookLM.</p>
@@ -34,11 +81,7 @@ function Dashboard({ data, onOpenManual, onToggleFav, emptyMsg }) {
             <strong className="kpi-value">{stats.soonManuals}</strong>
             <span className="kpi-delta kpi-delta-muted">aguardando publicação</span>
           </div>
-          <div className="kpi">
-            <span className="kpi-label">Última atualização</span>
-            <strong className="kpi-value kpi-value-sm">{stats.lastUpdate || "—"}</strong>
-            <span className="kpi-delta kpi-delta-muted">{stats.activeCategories} categori{stats.activeCategories === 1 ? "a ativa" : "as ativas"}</span>
-          </div>
+          <KpiNovidadeCard stats={stats}/>
         </div>
       </section>
 
@@ -48,7 +91,7 @@ function Dashboard({ data, onOpenManual, onToggleFav, emptyMsg }) {
           <button className={`chip${activeCat === "all" ? " is-active" : ""}`} onClick={() => setActiveCat("all")}>
             Todos <span className="chip-count">{manuals.length}</span>
           </button>
-          {categories.map(c => {
+          {[...categories].sort((a,b) => a.label.localeCompare(b.label)).map(c => {
             const count = manuals.filter(m => m.cat === c.id).length;
             return (
               <button key={c.id} className={`chip${activeCat === c.id ? " is-active" : ""}`}
