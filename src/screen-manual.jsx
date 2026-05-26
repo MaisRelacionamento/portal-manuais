@@ -15,7 +15,7 @@ function salvarFeedback(fb) {
 }
 window.MAIS_LER_FEEDBACKS = lerFeedbacks;
 
-function ManualView({ manual, onBack }) {
+function ManualView({ manual, onBack, isAdmin }) {
   const [fav, setFav] = useStateM(manual.fav);
   const [copied, setCopied] = useStateM(false);
   const [fbText, setFbText] = useStateM("");
@@ -187,8 +187,8 @@ function ManualView({ manual, onBack }) {
           )}
         </div>
 
-        {/* Sugestão anônima */}
-        <div className="mv-suggest">
+        {/* Sugestão anônima — só para colaboradores */}
+        {!isAdmin && <div className="mv-suggest">
           <strong>Achou algo pra melhorar?</strong>
           <p>Sua sugestão vai direto para o painel de administração — sem identificação.</p>
           {fbSent ? (
@@ -211,7 +211,7 @@ function ManualView({ manual, onBack }) {
               </Button>
             </>
           )}
-        </div>
+        </div>}
 
         <div className="mv-related">
           <strong>Relacionados</strong>
