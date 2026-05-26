@@ -3,7 +3,6 @@ const { useState: useStateSh, useEffect: useEffectSh } = React;
 
 function Sidebar({ active, onNavigate, collapsed, onToggleCollapse, isAdmin }) {
   const items = [
-    { id: "home",    icon: "home",    label: "Início" },
     { id: "library", icon: "book",    label: "Biblioteca" },
     { id: "fav",     icon: "bookmark",label: "Favoritos" },
   ];
@@ -157,16 +156,10 @@ function TopBar({ onLogout, user, breadcrumb, isAdmin, manuals, onOpenManual }) 
     <>
       <header className="topbar">
         <div className="topbar-left">
-          {breadcrumb && (
-            <div className="breadcrumb">
-              {breadcrumb.map((b, i) => (
-                <React.Fragment key={i}>
-                  {i > 0 && <Icon name="chevron" size={12}/>}
-                  <span className={i === breadcrumb.length - 1 ? "is-current" : ""}>{b}</span>
-                </React.Fragment>
-              ))}
-            </div>
-          )}
+          <div className="topbar-brand-label">
+            <MaisMark size={22}/>
+            <span>Portal MAIS</span>
+          </div>
         </div>
 
         <button className="topbar-search" onClick={() => setModalOpen(true)}>
