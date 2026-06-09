@@ -84,6 +84,20 @@ function normalizarManuais(rows) {
         pdf2_link: (r.pdf2_link || "").trim() || null,
         pdf3_nome: (r.pdf3_nome || "").trim() || null,
         pdf3_link: (r.pdf3_link || "").trim() || null,
+        pdf4_nome: (r.pdf4_nome || "").trim() || null,
+        pdf4_link: (r.pdf4_link || "").trim() || null,
+        pdf5_nome: (r.pdf5_nome || "").trim() || null,
+        pdf5_link: (r.pdf5_link || "").trim() || null,
+        pdf6_nome: (r.pdf6_nome || "").trim() || null,
+        pdf6_link: (r.pdf6_link || "").trim() || null,
+        pdf7_nome: (r.pdf7_nome || "").trim() || null,
+        pdf7_link: (r.pdf7_link || "").trim() || null,
+        pdf8_nome: (r.pdf8_nome || "").trim() || null,
+        pdf8_link: (r.pdf8_link || "").trim() || null,
+        pdf9_nome: (r.pdf9_nome || "").trim() || null,
+        pdf9_link: (r.pdf9_link || "").trim() || null,
+        pdf10_nome: (r.pdf10_nome || "").trim() || null,
+        pdf10_link: (r.pdf10_link || "").trim() || null,
       };
     });
 
