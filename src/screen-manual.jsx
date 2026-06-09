@@ -46,7 +46,7 @@ function ManualView({ manual, onBack, isAdmin }) {
 
   // PDFs relacionados — colunas pdf1_nome/pdf1_link ... pdf3_nome/pdf3_link na planilha
   const pdfs = [];
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 10; i++) {
     if (manual[`pdf${i}_nome`]) {
       pdfs.push({ nome: manual[`pdf${i}_nome`], link: manual[`pdf${i}_link`] || null });
     }
