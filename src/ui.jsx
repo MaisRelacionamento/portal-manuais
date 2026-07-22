@@ -38,6 +38,8 @@ const Icon = ({ name, size = 18, className = "", strokeWidth = 1.6 }) => {
     flag:      <><path d="M5 4v17M5 4h11l-2 4 2 4H5"/></>,
     dot:       <><circle cx="12" cy="12" r="3" fill="currentColor"/></>,
     sparkle:   <><path d="m12 3 2 7 7 2-7 2-2 7-2-7-7-2 7-2 2-7Z"/></>,
+    play:      <><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none"/></>,
+    slides:    <><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v3M8 21h8M8 19h8" strokeWidth="1.6"/><path d="M7 8h6M7 11h4"/></>,
     logout:    <><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></>,
   };
   return (
@@ -155,7 +157,7 @@ const ManualThumb = ({ manual, height = 120, big = false }) => {
         {big && <span className="thumb-cat">{manual.category.label}</span>}
       </div>
       {manual.tag && <div className="thumb-tag"><StatusBadge kind={manual.tag}/></div>}
-      {isSoon && <div className="thumb-soon-strip"><span>EM BREVE</span></div>}
+      {isSoon && <div className="thumb-tag"><span className="status-badge status-soon">EM BREVE</span></div>}
     </div>
   );
 };
