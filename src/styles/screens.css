@@ -914,6 +914,38 @@
 }
 
 /* ============================================================
+   VÍDEO EMBUTIDO (tela do manual)
+   ============================================================ */
+.mv-videos { margin-top: 8px; }
+.mv-video { margin-top: 12px; }
+.mv-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0b0f19;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.mv-video-frame iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+.mv-video-caption {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 8px;
+  font-size: 13px; font-weight: 600; color: var(--ink-700);
+}
+.mv-video-caption span { flex: 1; }
+.mv-video-caption a {
+  font-size: 12px; font-weight: 600;
+  color: var(--mais-orange-dark);
+  text-decoration: none;
+}
+.mv-video-caption a:hover { text-decoration: underline; }
+
+/* ============================================================
    PDFs RELACIONADOS (tela do manual)
    ============================================================ */
 .mv-pdfs { margin-top: 8px; }
