@@ -44,13 +44,33 @@ function ManualView({ manual, onBack, isAdmin }) {
     setTimeout(() => setFbSent(false), 3000);
   };
 
-  // PDFs relacionados — colunas pdf1_nome/pdf1_link ... pdf3_nome/pdf3_link na planilha
-  const pdfs = [];
-  for (let i = 1; i <= 10; i++) {
+  // Materiais de apoio — colunas pdf1_nome/pdf1_link ... pdf3_nome/pdf3_link na planilha.
+  // O tipo é detectado pelo NOME do material:
+  //   contém ".mp4", "vídeo" ou "video"        → vídeo (player embutido na página)
+  //   contém ".pptx", "apresenta" ou "slide"   → apresentação
+  //   qualquer outro                            → documento (PDF etc.)
+  const detectarTipo = (nome) => {
+    const n = (nome || "").toLowerCase();
+    if (/\.(mp4|mov|webm)\b|v[íi]deo/.test(n)) return "video";
+    if (/\.pptx?\b|apresenta|slide/.test(n)) return "slides";
+    return "pdf";
+  };
+  // Converte link do Drive (…/file/d/ID/view… ou …?id=ID) em link de preview embutível
+  const drivePreview = (link) => {
+    const m = (link || "").match(/\/file\/d\/([^/?#]+)/) || (link || "").match(/[?&]id=([^&#]+)/);
+    return m ? `https://drive.google.com/file/d/${m[1]}/preview` : null;
+  };
+  const materiais = [];
+  for (let i = 1; i <= 3; i++) {
     if (manual[`pdf${i}_nome`]) {
-      pdfs.push({ nome: manual[`pdf${i}_nome`], link: manual[`pdf${i}_link`] || null });
+      const nome = manual[`pdf${i}_nome`];
+      const link = manual[`pdf${i}_link`] || null;
+      materiais.push({ nome, link, tipo: detectarTipo(nome) });
     }
   }
+  const videos = materiais.filter(m => m.tipo === "video" && m.link && drivePreview(m.link));
+  const arquivos = materiais.filter(m => !videos.includes(m));
+  const ICONE_TIPO = { video: "play", slides: "slides", pdf: "download" };
 
   return (
     <div className="manual-view">
@@ -128,20 +148,44 @@ function ManualView({ manual, onBack, isAdmin }) {
           </section>
         )}
 
-        {/* PDFs relacionados */}
-        {pdfs.length > 0 && (
+        {/* Vídeos — player do Drive embutido na página */}
+        {videos.length > 0 && (
+          <section className="mv-section mv-videos">
+            <h2>{videos.length > 1 ? "Vídeos" : "Vídeo"}</h2>
+            {videos.map((v, i) => (
+              <div key={i} className="mv-video">
+                <div className="mv-video-frame">
+                  <iframe
+                    src={drivePreview(v.link)}
+                    title={v.nome}
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="mv-video-caption">
+                  <Icon name="play" size={15}/>
+                  <span>{v.nome}</span>
+                  <a href={v.link} target="_blank" rel="noopener">Abrir no Drive</a>
+                </div>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {/* Materiais de apoio (PDFs, apresentações etc.) */}
+        {arquivos.length > 0 && (
           <section className="mv-section mv-pdfs">
-            <h2>Documentos relacionados</h2>
+            <h2>Materiais de apoio</h2>
             <div className="mv-pdf-list">
-              {pdfs.map((p, i) => (
+              {arquivos.map((p, i) => (
                 p.link
                   ? <a key={i} href={p.link} target="_blank" rel="noopener" className="mv-pdf-btn">
-                      <Icon name="download" size={15}/>
+                      <Icon name={ICONE_TIPO[p.tipo]} size={15}/>
                       <span>{p.nome}</span>
                       <Icon name="arrow" size={13}/>
                     </a>
                   : <div key={i} className="mv-pdf-btn mv-pdf-nolnk">
-                      <Icon name="download" size={15}/>
+                      <Icon name={ICONE_TIPO[p.tipo]} size={15}/>
                       <span>{p.nome}</span>
                       <span className="mv-pdf-soon">em breve</span>
                     </div>
