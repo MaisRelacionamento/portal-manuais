@@ -61,7 +61,7 @@ function ManualView({ manual, onBack, isAdmin }) {
     return m ? `https://drive.google.com/file/d/${m[1]}/preview` : null;
   };
   const materiais = [];
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 10; i++) {
     if (manual[`pdf${i}_nome`]) {
       const nome = manual[`pdf${i}_nome`];
       const link = manual[`pdf${i}_link`] || null;
